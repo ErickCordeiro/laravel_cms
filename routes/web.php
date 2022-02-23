@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Web\HomeController as WebHomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,8 +18,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [WebHomeController::class, 'index'])->name('web.home');
-Route::get('/login', [LoginController::class, 'index'])->name('login');
 
-Route::prefix('admin')->group(function(){
-    Route::get('/', [HomeController::class, 'index'])->name('admin.dashboard');
+//Rota de Login
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate']);
+
+//Roda de Register
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'store']);
+
+//Logout
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::prefix('admin')->middleware('auth')->group(function(){
+    Route::get('/', [HomeController::class, 'index'])->name('admin');
 });
