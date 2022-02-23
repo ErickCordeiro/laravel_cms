@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Web\HomeController as WebHomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,9 +29,14 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
+//Rota Reset Password
+Route::get('/password/reset', [ResetPasswordController::class, 'index'])->name('password.reset');
+
 //Logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('admin');
+
+    Route::get('/users', [UserController::class, 'index'])->name('admin.users');
 });

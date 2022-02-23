@@ -49,8 +49,10 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
-        $data = $request->only(['email', 'password', 'remember']);
+        $data = $request->only(['email', 'password']);
         $validator = $this->validator($data);
+
+        $remember = $request->input('remember', false);
 
         if($validator->fails()){
             return redirect()->route('login')
@@ -58,7 +60,7 @@ class LoginController extends Controller
                 ->withInput();
         }
 
-        if(!Auth::attempt($data)){
+        if(!Auth::attempt($data, $remember)){
             $validator->errors()->add('password','Email/Senha incorretos, verifique!');
 
             return redirect()->route('login')
