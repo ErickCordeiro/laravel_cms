@@ -9,11 +9,11 @@
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h5><i class="icon fas fa-ban"></i> Atenção!</h5>
                 <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-                </div>
+            </div>
         </div>
     @endif
     <div class="container-fluid pt-4">
@@ -38,22 +38,36 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="userName">Nome Completo</label>
                         <div class="col-sm-6">
-                            <input autofocus="true" type="text" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" id="userName" name="name" placeholder="Nome Completo">
+                            <input autofocus="true" type="text" value="{{ old('name') }}"
+                                class="form-control @error('name') is-invalid @enderror" id="userName" name="name"
+                                placeholder="Nome Completo">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="userMail" class="col-sm-2 col-form-label">E-mail</label>
                         <div class="col-sm-6">
-                            <input type="email" value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror" id="userMail" name="email" placeholder="E-mail">
+                            <input type="email" value="{{ old('email') }}"
+                                class="form-control @error('email') is-invalid @enderror" id="userMail" name="email"
+                                placeholder="E-mail">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="userAdmin" class="col-sm-2 col-form-label">Administrador?</label>
+                        <div class="col-sm-6">
+                            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                <input type="checkbox" name="isAdmin" class="custom-control-input" id="customSwitch3">
+                                <label class="custom-control-label" for="customSwitch3">Vermelho para funcionário e Verde para Administrador</label>
+                            </div>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="userPassword" class="col-sm-2 col-form-label">Senha</label>
-                        <div class="col-sm-6"> 
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="userPassword" name="password"
-                                placeholder="Senha">
+                        <div class="col-sm-6">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                id="userPassword" name="password" placeholder="Senha">
                         </div>
                     </div>
 

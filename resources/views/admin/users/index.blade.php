@@ -34,16 +34,26 @@
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
-                                <td>Administrador</td>
+                                <td>{{($item->is_admin == 1)? "Administrador" : "Funcionário";}}</td>
                                 <td>
                                     <a class="btn btn-sm btn-info"
                                         href=" {{ route('admin.users.edit', ['user' => $item->id]) }}">
                                         <i class="fas fa-pencil-alt"></i></a>
 
-                                    <!-- Colocar o Formulário para excluir o registro com o verbo Delete -->
                                     <a class="btn btn-sm btn-warning"
                                         href=" {{ route('admin.users.show', ['user' => $item->id]) }}">
                                         <i class="fas fa-eye"></i></a>
+
+                                    @if (Auth::id() != $item->id)
+                                        <form class="d-inline"
+                                            action="{{ route('admin.users.destroy', ['user' => $item->id]) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('Você realmente deseja excluir esse registro?')">
+                                            @method("DELETE")
+                                            @csrf
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -51,7 +61,7 @@
                 </table>
             </div>
         </div>
-        
+
         <!-- Páginação de usuários -->
         {{-- $users->links() --}}
     </div>

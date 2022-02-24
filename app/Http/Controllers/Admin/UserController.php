@@ -5,11 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("can:edit-users");
+    }
     /**
      * Display a listing of the resource.
      *
@@ -42,8 +47,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->only([
-            'name', 'email', 'password', 'password_confirmation'
+            'name', 'email', 'password', 'password_confirmation', 'isAdmin'
         ]);
 
         $validator = Validator::make($data, [
@@ -62,6 +68,11 @@ class UserController extends Controller
         $user->name = $data["name"];
         $user->email = $data["email"];
         $user->password = Hash::make($data["password"]);
+
+        if(!empty($data["isAdmin"])){
+            $user->is_admin = ($data["isAdmin"] == 'on') ? 1 : 0;
+        }  
+
         $user->save();
 
         return redirect()->route("admin.users");
@@ -75,7 +86,13 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route("admin.users");
+        }
+
+        return view("admin.users.show", ["user" => $user]);
     }
 
     /**
@@ -112,7 +129,7 @@ class UserController extends Controller
         }
 
         $data = $request->only([
-            'name', 'email', 'password', 'password_confirmation'
+            'name', 'email', 'password', 'password_confirmation', 'isAdmin'
         ]);
 
         $validator = Validator::make($data, [
@@ -121,6 +138,10 @@ class UserController extends Controller
         ]);
 
         $user->name = $data["name"];
+
+        if(!empty($data["isAdmin"])){
+            $user->is_admin = ($data["isAdmin"] == 'on') ? 1 : 0;
+        }        
 
         //Verificando se existe o e-mail na base de dados
         if ($user->email != $data['email']) {
@@ -169,6 +190,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        if ($id != Auth::id()) {
+            $user->delete();
+        }
+
+        return redirect()->route('admin.users');
     }
 }

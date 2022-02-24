@@ -250,10 +250,11 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'account_settings', 'can' => 'edit-users'],
         [
             'text'    => 'Configurações',
             'icon'    => 'fas fa-cogs',
+            'can' => 'edit-users',
             'submenu' => [
                 [
                     'text' => 'Usuários',
