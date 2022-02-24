@@ -20,8 +20,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <table class="table table-hover table-bordered table-striped dataTable dtr-inline"
-                    arial-describedby="example_info" id="example1">
+                <table class="table table-hover table-bordered table-striped">
                     <thead>
                         <th>Cód.</th>
                         <th>Nome Completo</th>
@@ -42,8 +41,8 @@
                                         <i class="fas fa-pencil-alt"></i></a>
 
                                     <!-- Colocar o Formulário para excluir o registro com o verbo Delete -->
-                                    <a class="btn btn-sm btn-warning" 
-                                    href=" {{ route('admin.users.show', ['user' => $item->id]) }}">
+                                    <a class="btn btn-sm btn-warning"
+                                        href=" {{ route('admin.users.show', ['user' => $item->id]) }}">
                                         <i class="fas fa-eye"></i></a>
                                 </td>
                             </tr>
@@ -52,5 +51,8 @@
                 </table>
             </div>
         </div>
+        
+        <!-- Páginação de usuários -->
+        {{-- $users->links() --}}
     </div>
 @endsection

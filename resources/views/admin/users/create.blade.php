@@ -21,7 +21,7 @@
             <form class="form-horizontal" action="{{ route('admin.users.store') }}" method="post"
                 enctype="multipart/form-data">
                 @csrf
-                <div class="card_header">
+                <div class="card-header">
                     <div class="row m-2">
                         <div class="col-sm-6">
                             <h2>Cadastro de Usuários</h2>
@@ -36,29 +36,29 @@
 
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="col-sm-2" for="userName">Nome Completo</label>
+                        <label class="col-sm-2 col-form-label" for="userName">Nome Completo</label>
                         <div class="col-sm-6">
-                            <input type="text" value="{{old('name')}}" class="form-control" id="userName" name="name" placeholder="Nome Completo">
+                            <input autofocus="true" type="text" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" id="userName" name="name" placeholder="Nome Completo">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="userMail" class="col-sm-2">E-mail</label>
+                        <label for="userMail" class="col-sm-2 col-form-label">E-mail</label>
                         <div class="col-sm-6">
-                            <input type="email" value="{{old('email')}}" class="form-control" id="userMail" name="email" placeholder="E-mail">
+                            <input type="email" value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror" id="userMail" name="email" placeholder="E-mail">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="userPassword" class="col-sm-2">Senha</label>
-                        <div class="col-sm-6">
-                            <input type="password" class="form-control" id="userPassword" name="password"
+                        <label for="userPassword" class="col-sm-2 col-form-label">Senha</label>
+                        <div class="col-sm-6"> 
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="userPassword" name="password"
                                 placeholder="Senha">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="userPasswordConfirmed" class="col-sm-2">Confirme a Senha</label>
+                        <label for="userPasswordConfirmed" class="col-sm-2 col-form-label">Confirme a Senha</label>
                         <div class="col-sm-6">
                             <input type="password" class="form-control" id="userPasswordConfirmed"
                                 name="password_confirmation" placeholder="Confirme a Senha">

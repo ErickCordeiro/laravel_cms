@@ -38,6 +38,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('admin');
 
+
+    //Rotas de Usuários
     Route::get('/users', [UserController::class, 'index'])->name('admin.users');
     Route::get('/users/create', [UserController::class, 'create'])->name('admin.users.create');
     Route::post('/users', [UserController::class, 'store'])->name('admin.users.store');
