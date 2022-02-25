@@ -25,7 +25,7 @@ class UserController extends Controller
         //$users = User::paginate(25) -- Colocar a quantidade que você quer que exiba.
         //No fornt-end colocar o {{ $users->links()}}
 
-        $users = User::all();
+        $users = User::where("id", "!=", Auth::id())->get();
         return view('admin.users.index', ["users" => $users]);
     }
 

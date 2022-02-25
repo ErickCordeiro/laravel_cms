@@ -16,21 +16,31 @@
             </div>
         </div>
     @endif
+
+    @if (session('success'))
+    <div class="container-fluid py-2">
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h5><i class="icon fas fa-check"></i> Sucesso!</h5>
+            {{session('success')}}
+        </div>
+    </div>
+@endif
     <div class="container-fluid pt-4">
         <div class="card">
-            <form class="form-horizontal" action="{{ route('admin.users.update', ['user' => $user->id]) }}" method="post"
+            <form class="form-horizontal" action="{{ route('admin.profile.update', ['user' => $user->id]) }}" method="post"
                 enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="card-header">
                     <div class="row m-2">
                         <div class="col-sm-6">
-                            <h2>Editar Usuário</h2>
+                            <h2>Meu Perfil</h2>
                         </div>
                         <div class="col-sm-6">
                             <button class="my-1 mx-2 float-sm-right btn btn-success">Salvar Registro</button>
-                            <a class=" my-1 mx-2 float-sm-right btn btn-danger" href="{{ route('admin.users') }}">
-                                Cancelar</a>
+                            {{-- <a class=" my-1 mx-2 float-sm-right btn btn-danger" href="{{ route('admin.users') }}">
+                                Cancelar</a> --}}
                         </div>
                     </div>
                 </div>

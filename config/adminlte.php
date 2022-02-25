@@ -250,7 +250,13 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings', 'can' => 'edit-users'],
+        
+        ['header' => 'account_settings'],
+        [
+            'text' => 'Meu Perfil',
+            'url'  => 'admin/profile',
+            'icon' => 'fas fa-user',
+        ],
         [
             'text'    => 'Configurações',
             'icon'    => 'fas fa-cogs',
@@ -259,9 +265,8 @@ return [
                 [
                     'text' => 'Usuários',
                     'url'  => 'admin/users',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-users',
                 ],
-                
                 [
                     'text' => 'E-mail',
                     'url'  => 'admin/mail',
