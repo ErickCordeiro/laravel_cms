@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -38,6 +39,10 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('admin');
+
+    //Rota Settings 
+    Route::get('/settings', [SettingsController::class, 'edit'])->name('admin.settings');
+    Route::put('/settings/{code}/update', [SettingsController::class, 'update'])->name('admin.settings.update');
 
     //Rotas Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');

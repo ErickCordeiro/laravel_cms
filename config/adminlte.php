@@ -263,6 +263,11 @@ return [
             'can' => 'edit-users',
             'submenu' => [
                 [
+                    'text' => 'Geral ',
+                    'url'  => 'admin/settings',
+                    'icon' => 'fas fa-cog',
+                ],
+                [
                     'text' => 'Usuários',
                     'url'  => 'admin/users',
                     'icon' => 'fas fa-users',
