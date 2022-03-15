@@ -17,6 +17,17 @@
 @endsection
 
 @section('content')
+
+    @if (session('success'))
+        <div class="container-fluid py-2">
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-check"></i> Sucesso!</h5>
+                {{ session('success') }}
+            </div>
+        </div>
+    @endif
+
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
@@ -34,7 +45,7 @@
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
-                                <td>{{($item->is_admin == 1)? "Administrador" : "Funcionário";}}</td>
+                                <td>{{ $item->is_admin == 1 ? 'Administrador' : 'Funcionário' }}</td>
                                 <td>
                                     <a class="btn btn-sm btn-info"
                                         href=" {{ route('admin.users.edit', ['user' => $item->id]) }}">
@@ -63,6 +74,6 @@
         </div>
 
         <!-- Páginação de usuários -->
-        {{-- $users->links() --}}
+        {{ $users->links() }}
     </div>
 @endsection

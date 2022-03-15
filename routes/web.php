@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController;
@@ -56,4 +57,12 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::put('/users/{user}/update', [UserController::class, 'update'])->name('admin.users.update');
     Route::get('/users/{user}/show', [UserController::class, 'show'])->name('admin.users.show');
     Route::delete('/users/{user}/destroy', [UserController::class, 'destroy'])->name('admin.users.destroy');
+
+    //Rotas Pages
+    Route::get('/pages', [PageController::class, 'index'])->name('admin.pages');
+    Route::get('/pages/create', [PageController::class, 'create'])->name('admin.pages.create');
+    Route::post('/pages', [PageController::class, 'store'])->name('admin.pages.store');
+    Route::get('/pages/{page}/edit', [PageController::class, 'edit'])->name('admin.pages.edit');
+    Route::put('/pages/{page}/update', [PageController::class, 'update'])->name('admin.pages.update');
+    Route::delete('/pages/{page}/destroy', [PageController::class, 'destroy'])->name('admin.pages.destroy');
 });

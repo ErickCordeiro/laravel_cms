@@ -87,7 +87,8 @@
                         <div class="col-sm-6">
                             <input type="color"
                                 class="form-control @error('bg_color') is-invalid @enderror" id="bg_color" name="bg_color"
-                                value="{{$settings->bg_color}}">
+                                value="{{$settings->bg_color}}"
+                                style="width: 70px">
                         </div>
                     </div>
 
@@ -96,7 +97,8 @@
                         <div class="col-sm-6">
                             <input type="color"
                                 class="form-control @error('font_color') is-invalid @enderror" id="font_color" name="font_color"
-                                value="{{$settings->font_color}}">
+                                value="{{$settings->font_color}}"
+                                style="width: 70px">
                         </div>
                     </div>
                 </div>

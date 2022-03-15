@@ -22,10 +22,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //$users = User::paginate(25) -- Colocar a quantidade que você quer que exiba.
-        //No fornt-end colocar o {{ $users->links()}}
-
-        $users = User::where("id", "!=", Auth::id())->get();
+        $users = User::where("id", "!=", Auth::id())->paginate(25);
         return view('admin.users.index', ["users" => $users]);
     }
 
@@ -75,7 +72,8 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route("admin.users");
+        return redirect()->route("admin.users")
+            ->with('success', 'Seu registro foi incluido com sucesso!');
     }
 
     /**
@@ -179,7 +177,8 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route("admin.users");
+        return redirect()->route("admin.users")
+            ->with('success', 'Seu registro foi alterado com sucesso!');;
     }
 
     /**
