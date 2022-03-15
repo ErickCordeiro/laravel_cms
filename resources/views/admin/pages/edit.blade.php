@@ -48,7 +48,7 @@
                     <div class="form-group row">
                         <label for="content" class="col-sm-2 col-form-label">Conteúdo</label>
                         <div class="col-sm-6">
-                            <textarea class="form-control" id="content" name="content" placeholder="Conteúdo"> {{ $page->content }}</textarea>
+                            <textarea class="form-control contentfield" id="content" name="content" placeholder="Conteúdo"> {{ $page->content }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -56,4 +56,21 @@
             </form>
         </div>
     </div>
+
+
+    <script src="https://cdn.tiny.cloud/1/kcqs36sp0hpb56ju8solhacerx7lc3f646bbad1luu4ctqv7/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector :  'textarea.contentfield',
+            height: 450,
+            menubar: false,
+            plugins: [
+                'link', 'table', 'image', 'autoresize', 'lists'
+            ],
+            toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | table | link image | bullist numlist',
+            content_css: [
+                '{{asset("assets/css/content.css")}}'
+            ]
+        })
+    </script>
 @endsection
