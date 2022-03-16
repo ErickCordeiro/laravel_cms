@@ -109,7 +109,7 @@ class PageController extends Controller
                 'content'
             ]);
 
-            if ($page['title'] == $data['title']) {
+            if ($page['title'] !== $data['title']) {
                 $data['slug'] = Str::slug($data['title'], '-');
 
                 $validator = Validator::make($data, [
