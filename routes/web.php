@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Web\HomeController as WebHomeController;
+use App\Http\Controllers\Web\PageController as WebPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,3 +67,5 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::put('/pages/{page}/update', [PageController::class, 'update'])->name('admin.pages.update');
     Route::delete('/pages/{page}/destroy', [PageController::class, 'destroy'])->name('admin.pages.destroy');
 });
+
+Route::fallback([WebPageController::class, 'index']);
